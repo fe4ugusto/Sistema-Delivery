@@ -1,0 +1,30 @@
+image: maven:3.9.6-eclipse-temurin-17
+
+stages:
+  - build
+  - test
+  - deploy
+
+build-job:
+  stage: build
+  script:
+    - mvn clean compile
+
+test-job:
+  stage: test
+  script:
+    - echo "Test fail intentionally"
+    - exit 1
+  artifacts:
+    when: always
+    paths:
+      - target/surefire-reports/*.xml
+    reports:
+      junit: target/surefire-reports/*.xml
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Simulação de deploy na branch main"
+  only:
+    - main
