@@ -1,6 +1,7 @@
 package br.com.felipe.app;
 
 import br.com.felipe.interfaces.Avaliacao;
+import java.time.LocalDateTime;
 
 public class Entrega implements Avaliacao {
     private String endereco;
@@ -8,6 +9,8 @@ public class Entrega implements Avaliacao {
     private String status;
     private int avaliacao;
     private int tempoEstimado;
+    private String instrucoes;
+    private LocalDateTime dataEntrega;
 
     public Entrega(String endereco, Entregador entregador) {
         if (endereco == null || endereco.isEmpty()) {
@@ -21,15 +24,19 @@ public class Entrega implements Avaliacao {
         this.status = "A caminho";
         this.avaliacao = 0;
         this.tempoEstimado = 30; // valor padrão
+        this.instrucoes = "Entregar na porta";
+        this.dataEntrega = LocalDateTime.now().plusMinutes(tempoEstimado);
     }
 
     public void exibirDados() {
         System.out.println("=== ENTREGA ===");
         System.out.println("Endereço: " + endereco);
+        System.out.println("Instruções: " + instrucoes);
         System.out.println("Entregador: " + entregador.getNome());
         System.out.println("Telefone: " + entregador.getTelefone());
         System.out.println("Status: " + status);
         System.out.println("Tempo estimado: " + tempoEstimado + " minutos");
+        System.out.println("Data estimada de entrega: " + dataEntrega);
         System.out.println("Avaliação da entrega: " + avaliacao);
     }
 
@@ -57,6 +64,23 @@ public class Entrega implements Avaliacao {
             throw new IllegalArgumentException("Tempo estimado deve ser positivo.");
         }
         this.tempoEstimado = tempoEstimado;
+        this.dataEntrega = LocalDateTime.now().plusMinutes(tempoEstimado);
+    }
+
+    public String getInstrucoes() {
+        return instrucoes;
+    }
+
+    public void setInstrucoes(String instrucoes) {
+        this.instrucoes = instrucoes;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
     }
 
 	@Override

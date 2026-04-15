@@ -1,0 +1,4 @@
+--patch-module
+ProjetoSistemaDelivery=_
+--add-reads
+ProjetoSistemaDelivery=ALL-UNNAMED
